@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<!DOCTYPE html>
+<head>
+
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.10.1.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-csv/0.71/jquery.csv-0.71.min.js"></script>
+
+<script type="text/javascript">
+
+google.load('visualization', '1', {packages: ['geochart']});
+google.setOnLoadCallback(drawVisualizations);
+
+function drawVisualizations() {
+$.get("D:\practise\Data.csv", function(csv_in) {
+var data1_in = $.csv.toArrays(csv_in, {onParseValue: $.csv.hooks.castToScalar});
+var data1_data = new google.visualization.arrayToDataTable(data1_in);
+var data1_chart = new google.visualization.GeoChart(document.getElementById('data1_chart'));
+data1.draw(map_2003_data, {'width': '640px','height': '480px'});
+});
+
+}
+</script>
+</head>
+
+<body>
+<div id="data1_chart" style="width: 640px; height: 480px;"></div>
+
+</body>
+</html>
