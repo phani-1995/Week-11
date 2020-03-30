@@ -1,0 +1,39 @@
+<html>
+<head>
+<script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+</head>
+<head>
+<script  src="https://www.gstatic.com/charts/loader.js"></script>
+<script>
+  google.charts.load('current', {packages: ['corechart']});
+  google.charts.setOnLoadCallback(drawSheetName);
+
+    function drawSheetName() {
+      var queryString = encodeURIComponent('SELECT C WHERE datatype=char');
+
+      var query = new google.visualization.Query(
+          'https://docs.google.com/spreadsheets/d/19qwQFNQguV248AGxRj1jzN83idzRUppQ2pE8W0oegIY/edit?usp=sharing' + queryString);
+
+      query.send(handleSampleDataQueryResponse);
+    }
+
+    function handleSampleDataQueryResponse(response) {
+      if (response.isError()) {
+        alert('Error in query: ' + response.getMessage() + ' ' + response.getDetailedMessage());
+        return;
+      }
+
+      var data = response.getDataTable();
+      var chart = new google.visualization.PieChart(document.getElementById('myPieChart'));
+      chart.draw(data, null);
+    }
+    </script>
+    </head>
+<body>
+  <!-- Identify where the chart should be drawn. -->
+  <div id="myPieChart"/>
+</body>
+</html>

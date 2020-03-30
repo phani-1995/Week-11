@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Example for JQuery visulization</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-beta1/jquery.min.js"></script>
+		<script src="../../jquery-google-sheet-to-json.min.js"></script>
+		<script src="./exam.js"></script>
+		<style>
+			dl{
+			border-top: 1px solid black;
+			margin-top: 1.0em;
+			padding-top: 1.0em;
+			}
+
+			dt{
+			font-weight: bold;
+			}
+		</style>
+</head>
+<body>
+    <a href="https://docs.google.com/spreadsheets/d/19qwQFNQguV248AGxRj1jzN83idzRUppQ2pE8W0oegIY/edit#gid=501634916">The Spreadsheet</a>
+
+</body>
+
+
+<body>
+<div id="chart-container">
+    FusionCharts will render here
+</div>
+
+    <script src="JSC/JSCharting.js"></script>
+    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+    <div id="chart"></div>
+
+    <script>
+        $('#chart').JSC({ /*Chart Options*/  });
+        $('#chart').JSC({
+        xAxisScaleType: 'time',
+        series: parsedData
+});
+    </script>
+
+</body>
+<!--<script src="http://static.fusioncharts.com/code/latest/fusioncharts.js"></script>-->
+<!--<div id="chart-container">-->
+<!--  <p>The chart will render here!</p>-->
+<!--</div>-->
+<!--<script>-->
+<!--    new FusionCharts({-->
+<!--    type: 'bar2d',-->
+<!--    renderAt: 'chart-container',-->
+<!--    width: '100%',-->
+<!--    height: '300',-->
+<!--    dataFormat: 'json',-->
+<!--    dataSource: {-->
+<!--        "chart": {-->
+<!--        "caption": "Bridgelabs",-->
+<!--        "yAxisName": "technology",-->
+<!--        "numberPrefix": "$"-->
+<!--    },-->
+<!--    "data": parsedData-->
+<!--  }-->
+<!--    }).render();-->
+<!--</script>-->
+</html>
