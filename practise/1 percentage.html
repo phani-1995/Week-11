@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>LOADING CSV DATA</title>
+    <script  src=" https://d3js.org/d3.v5.min.js">"></script>
+    <style>
+        text
+        {
+         font-size:15px;
+         font-weight:bold;
+         fill:white;
+        }
+    </style>
+<!--    <script src="src="//d3js.org/d3.v3.min.js"></script>-->
+<!--    <script src="./percent.js"></script>-->
+</head>
+<!--<script>-->
+<!--var width=600, height=500;-->
+<!--var colors=d3.scaleOrdinal(d3.schemeDark2);-->
+<!--var svg=d3.select("body").append("svg")-->
+<!--          .attr("width", width).attr("height",height)-->
+<!--d3.csv("../practise/Data.csv", function(data) {-->
+<!-- var data= d3.pie().sort(null).value(function(d){return d.Gender;})-->
+<!--    console.log(data);-->
+
+
+<!--    var segments=d3.arc()-->
+<!--                   .innerRadius(0)-->
+<!--                   .outerRadius(200)-->
+<!--                   .padAngle(.05)-->
+<!--                   .padRadius(50);-->
+<!--    var sections=svg.append("g").attr("transform", "translate(250,250)").selectAll("path").data(data);-->
+<!--    sections.enter().append("path").attr("d",segments).attr("fill",function(d){return colors(d.data.Gender);});-->
+<!--    var content=d3.select("g").selectAll("text").data(data);-->
+<!--    content.enter().append("text").each(function(d){-->
+<!--    var center=segments.centroid(d);-->
+<!--    d3.select(this).attr("x", center[0]).attr("y",center[1]).text(d.data.Gender);-->
+<!--    })-->
+
+<!--});-->
+<body>
+<script>
+
+    var width = 960,
+    height = 500,
+     // find the min of width and height and devided by 2
+    radius = Math.min(width, height) / 2;
+// Scales are functions that map from an input domain to an output range.  Ordinal scales have a discrete domain,
+ // such as a set of name
+    var color = d3.scaleOrdinal(d3.schemeDark2);
+    // Constructs a new arc generator with the default innerRadius-, outerRadius-, startAngle- and endAngle-accessor functions
+    var arc = d3.arc()
+    // the outer radius of pie chart
+        .outerRadius(radius - 10)
+         // the inner radius of the pie chart, set 0 for now
+        .innerRadius(0);
+
+    // Constructs a new pie function
+    var pie = d3.pie()
+    // not sorting
+                       .sort(null)
+        // set the pie chart value to population.
+                        .value(function(d) { return d.Gender; });
+    var svg = d3.select("body").append("svg")
+        .attr("width", width)
+        .attr("height", height)
+      .append("g")
+        .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+
+    d3.csv("../practise/Data.csv", function(data) {
+        console.log(data);
+
+
+    var g = svg.selectAll(".arc")
+                .data(pie(data))
+            .enter().append("g")
+                .attr("class", "arc");
+      // append path, the pie for each age
+    g.append("path")
+        .attr("d", arc)
+        .style("fill", function(d) { return color(d.data.Gender); });
+
+    // add text
+    g.append("text")
+        .attr("transform", function(d) { return "translate(" + arc.centroid(d) + ")"; })
+        .attr("dy", ".35em")
+        .style("text-anchor", "middle")
+        .text(function(d) { return d.data.Gender; });
+});
+
+
+
+</script>
+</body>
+</html>
